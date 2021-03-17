@@ -1,10 +1,29 @@
 #include <Arduino.h>
 #include <ArduinoBLE.h>
+#include <LiquidCrystal.h>
 
+// LED pins
 #define RED 22
 #define BLUE 24
 #define GREEN 23
 #define LED_PWR 25u
+
+// I/O pins
+#define PUSH_BUTTON 2
+#define SWITCH_MODE_A 8
+#define SWITCH_MODE_B 9
+#define SWITCH_MODE_C 10
+
+// LCD Screen pins
+const int REGISTER_SELECT = 12;
+const int ENABLE = 11;
+const int DFOUR = 4;
+const int DFIVE = 5;
+const int DSIX = 6;
+const int DSEVEN = 7;
+
+
+LiquidCrystal lcd(REGISTER_SELECT, ENABLE, DFOUR, DFIVE, DSIX, DSEVEN);
 
 // website for UUID https://www.uuidgenerator.net/version1
 
@@ -17,6 +36,7 @@ BLEService ledservice("6995d586-4351-11eb-b378-0242ac130002"); // Device 1
 // establish a characteristic with the same UUID with read and write priveledges from the connected device
 BLECharCharacteristic switchChar("f596897a-432b-11eb-b378-0242ac130002", BLERead | BLEWrite);
 
+//NRF_RADIO_BASE = (NRF_RADIO_BASE + 0x510) | RADIO_MODE_MODE_Ieee802154_250Kbit;
 
 // When a device connects to the arduino, enter here
 void blePeripheralConnectHandler(BLEDevice central)
@@ -62,9 +82,17 @@ void setup() {
   // begin serial protocol with 9600 baud rate
   Serial.begin(9600);
 
-  // make the blue led pin an output
+  lcd.begin(16,2);
+  lcd.print("Hello, World!");
+
+  // Configure I/O
   pinMode(BLUE, OUTPUT);
   pinMode(LED_PWR, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(PUSH_BUTTON, INPUT);
+  pinMode(SWITCH_MODE_A, INPUT);
+  pinMode(SWITCH_MODE_B, INPUT);
+  pinMode(SWITCH_MODE_C, INPUT);
 
   digitalWrite(BLUE, LOW);
   digitalWrite(LED_PWR, LOW);
@@ -99,6 +127,9 @@ void setup() {
 
 void loop() {
 
+  // set the cursor to column 0, line 1
+  lcd.setCursor(0,1);
+  lcd.print(millis() / 1000);
   // poll for events to occur
   BLE.poll();
   BLE.scan(); // scans for any nearby advertising device
