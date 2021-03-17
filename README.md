@@ -34,7 +34,7 @@ Here is an example of how to create a new branch off of main. Please use the fol
 Create a new branch off of **RaspberryPi** called "Tristan_RaspberryPi_PCB_Design"
 
 ```
-git checkout -b Tristan_RaspberryPi_PCB_Design main
+git checkout -b Tristan_RaspberryPi_PCB_Design RaspberryPi
 ```
 
 #### Git Workflow
