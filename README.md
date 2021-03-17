@@ -46,7 +46,7 @@ Here is a step by step explanation of how a typical worksession goes
 
 2. Pull any and all changes from the github repository **main** to be saved into your local git. Note you must enter the exact branches you wish to update your local version of to the github version. See step 3 on how to change current branch. 
 ```
-git pull
+git pull origin [Name_of_Branch]
 ```
 
 3. Enter the exact branch you wish to do development in. Important to do this step as failure to do so may result in conflicts
