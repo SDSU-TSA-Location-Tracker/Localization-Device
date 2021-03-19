@@ -14,10 +14,10 @@ const byte INTERNAL_LED = 13;
 const byte PUSH_BUTTON_SUBMIT = 3;
 const byte PUSH_BUTTON_LOC = 9;
 
-volatile byte AnchorAZeroRSSI;
-volatile byte AnchorAFourRSSI;
-volatile byte AnchorEZeroRSSI;
-volatile byte AnchorEFourRSSI;
+volatile char AnchorAZeroRSSI;
+volatile char AnchorAFourRSSI;
+volatile char AnchorEZeroRSSI;
+volatile char AnchorEFourRSSI;
 volatile char currentLocation[3] = {"A0"};
 volatile byte locationIndex;
 
@@ -43,29 +43,31 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // OLE
 
 void anchorScan(void)
 {
-  BLE.scanForName("AN-A0-NA");
-  BLEDevice AnchorAZero = BLE.available();
-  if (AnchorAZero)
+  BLE.scan(); // scan for all BLE devices in prox
+  BLEDevice remote = BLE.available();
+  if(remote.localName()=="AN-A0-NA")
   {
-    AnchorAZeroRSSI = AnchorAZero.rssi();
+    AnchorAZeroRSSI = remote.rssi();
+    Serial.print("AN-A0-AN\t");
+    Serial.print(AnchorAZeroRSSI);
   }
-  BLE.scanForName("AN-E0-NA");
-  BLEDevice AnchorEZero = BLE.available();
-  if (AnchorEZero)
+  if(remote.localName()=="AN-A4-NA")
   {
-    AnchorEZeroRSSI = AnchorEZero.rssi();
+    AnchorAFourRSSI = remote.rssi();
+    Serial.print("AN-A4-AN\t");
+    Serial.print(AnchorAFourRSSI);
   }
-  BLE.scanForName("AN-A4-NA");
-  BLEDevice AnchorAFour = BLE.available();
-  if (AnchorAFour)
+  if(remote.localName()=="AN-E0-NA")
   {
-    AnchorAFourRSSI = AnchorAFour.rssi();
+    AnchorEZeroRSSI = remote.rssi();
+    Serial.print("AN-E0-AN\t");
+    Serial.print(AnchorEZeroRSSI);
   }
-  BLE.scanForName("AN-E4-NA");
-  BLEDevice AnchorEFour = BLE.available();
-  if (AnchorEFour)
+    if(remote.localName()=="AN-E4-NA")
   {
-    AnchorEFourRSSI = AnchorEFour.rssi();
+    AnchorEFourRSSI = remote.rssi();
+    Serial.print("AN-E4-AN\t");
+    Serial.print(AnchorEFourRSSI);
   }
 }
 
@@ -117,24 +119,14 @@ void buttonAction(char Mode)
 {
   switch (Mode) {
     case 'A':
+      // update current location to next grid spot
       locationIndex++;
       locationIndex%=25;
       currentLocation[0] = locationArray[locationIndex][0];
       currentLocation[1] = locationArray[locationIndex][1];
-//      if(locationIndex<24)
-//      {
-//        locationIndex++;
-//        currentLocation[0] = locationArray[locationIndex][0];
-//        currentLocation[1] = locationArray[locationIndex][1];
-//      }
-//      else
-//      {
-//        locationIndex = 0;
-//        currentLocation[0] = locationArray[locationIndex][0];
-//        currentLocation[1] = locationArray[locationIndex][1];
-//      }
       break;
     case 'B':
+      // Send the current location and rssi anchor samples over serial
       digitalWrite(EXTERNAL_LED, HIGH);
       Serial.print(currentLocation[0]);
       Serial.print(currentLocation[1]);
@@ -223,7 +215,6 @@ void loop() {
   // Measure the RSSI values from each anchor and save it
 
   anchorScan();
-  //BLE.end();
   
   lastLocationState = debounce(PUSH_BUTTON_LOC, lastLocationState);
   updateDisplay();
