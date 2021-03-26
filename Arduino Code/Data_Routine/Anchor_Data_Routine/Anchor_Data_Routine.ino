@@ -120,12 +120,10 @@ void buttonAction()
 void BLEroutine(void)
 {
   BLE.setLocalName(anchorName);
-  if(BLE.advertise())
-  {
-    Serial.print("Advertising Name:");
-    Serial.print(anchorName);
-    Serial.print("\n");
-  }
+  BLE.advertise();
+  Serial.print("Advertising Name:");
+  Serial.print(anchorName);
+  Serial.print("\n");
 }
 
 void setup() {
@@ -154,6 +152,7 @@ void setup() {
 
 void loop() {
   lastReadingState = debounce(PUSH_BUTTON, lastReadingState);
+  delay(1000);
 }
 
 void cycleRowState() {
