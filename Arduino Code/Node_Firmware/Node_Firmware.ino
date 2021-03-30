@@ -37,6 +37,9 @@ BLECharCharacteristic GenderCharB("87adced6-7bf9-11eb-9439-0242ac130002", BLERea
 
 BLEDevice scannedNode;
 
+
+void buttonAction
+
 void setup() {
   Serial.begin(9600);
   Serial.print("Firmware Version: ");
@@ -59,41 +62,33 @@ void setup() {
 }
 
 void loop() {
+  lastReadingState = debounce(PUSH_BUTTON, lastReadingState);
   if (MODE == 'A')
   {
-    BLE.scanForName("MO-00-MA");
+    BLE.scan();
     scannedNode = BLE.available();
-    if (scannedNode)
+    if (scannedNode.localName()="MO-00-MA")
     {
       IndexCharA.writeValue((byte)0x00);
-      RSSICharA.writeValue((byte)scannedNode.rssi());
+      RSSICharA.writeValue((int)scannedNode.rssi());
       GenderCharA.writeValue((char)'M');
     }
-    BLE.stopScan();
-    BLE.scanForName("MO-01-MA");
-    scannedNode = BLE.available();
-    if (scannedNode)
+    if (scannedNode.localName() = "MO-01-MA")
     {
       IndexCharB.writeValue((byte)0x01);
-      RSSICharB.writeValue((byte)scannedNode.rssi());
+      RSSICharB.writeValue((int)scannedNode.rssi());
       GenderCharB.writeValue((char)'M');
     }
-    BLE.stopScan();
-    BLE.scanForName("MO-00-FE");
-    scannedNode = BLE.available();
-    if (scannedNode)
+    if (scannedNode.localName() = "MO-00-FE")
     {
       IndexCharA.writeValue((byte)0x00);
-      RSSICharA.writeValue((byte)scannedNode.rssi());
+      RSSICharA.writeValue((int)scannedNode.rssi());
       GenderCharA.writeValue((char)'F');
     }
-    BLE.stopScan();
-    BLE.scanForName("MO-01-FE");
-    scannedNode = BLE.available();
-    if (scannedNode)
+    if (scannedNode.localName() = "MO-01-FE")
     {
       IndexCharB.writeValue((byte)0x01);
-      RSSICharB.writeValue((byte)scannedNode.rssi());
+      RSSICharB.writeValue((int)scannedNode.rssi());
       GenderCharB.writeValue((char)'F');
     }
     BLE.stopScan();
@@ -128,7 +123,7 @@ void buttonIncrement(void) {
     else BLE_Name[4] = '1';
   }
   BLE.stopAdvertise();
-  BLE.setLocalName(BLE_Name);
+  BLE.setLocalName(BLE_Name); 
   BLE.advertise();
 }
 
