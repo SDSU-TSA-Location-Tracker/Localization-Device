@@ -4,9 +4,9 @@ const float VERSION = 1.0;
 
 const byte EXTERNAL_LED = 2;
 const byte PUSH_BUTTON = 3;
-const byte SWITCH_MODE_A = 11;
-const byte SWITCH_MODE_B = 10;
-const byte SWITCH_MODE_C = 9;
+const byte SWITCH_MODE_M = 10;
+const byte SWITCH_MODE_A = 9;
+const byte SWITCH_MODE_F = 8;
 
 volatile char MODE;
 volatile char currentLocation[3] = "A0";
@@ -44,22 +44,22 @@ void setup() {
   Serial.print("\n");
 
   pinMode(PUSH_BUTTON, INPUT);
+  pinMode(SWITCH_MODE_M, INPUT);
   pinMode(SWITCH_MODE_A, INPUT);
-  pinMode(SWITCH_MODE_B, INPUT);
-  pinMode(SWITCH_MODE_C, INPUT);
+  pinMode(SWITCH_MODE_F, INPUT);
   pinMode(EXTERNAL_LED, OUTPUT);
 
   attachInterrupt(digitalPinToInterrupt(PUSH_BUTTON), buttonIncrement, RISING);
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_A), mobileMale, RISING);
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_B), anchor, RISING);
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_C), mobileFemale, RISING);
+  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_M), mobileMale, HIGH);
+  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_A), anchor, HIGH);
+  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_F), mobileFemale, HIGH);
 
   LED_STATE = LOW;
   digitalWrite(EXTERNAL_LED, LED_STATE);
 }
 
 void loop() {
-  if (MODE == 'B')
+  if (MODE == 'A')
   {
     BLE.scanForName("MO-00-MA");
     scannedNode = BLE.available();
@@ -105,7 +105,7 @@ void loop() {
 
 
 void buttonIncrement(void) {
-  if (MODE == 'B')
+  if (MODE == 'A')
   {
     if (currentLocation != "E0")
     {
@@ -146,7 +146,7 @@ void mobileMale(void) {
       }
     }
   }
-  MODE = 'A';
+  MODE = 'M';
   BLE_Name[0] = 'M';
   BLE_Name[1] = 'O';
   BLE_Name[2] = '-';
@@ -174,7 +174,7 @@ void mobileFemale(void) {
       }
     }
   }
-  MODE = 'C';
+  MODE = 'F';
   BLE_Name[0] = 'M';
   BLE_Name[1] = '0';
   BLE_Name[2] = '-';
@@ -203,7 +203,7 @@ void anchor(void) {
     }
 
   }
-  MODE = 'B';
+  MODE = 'A';
   BLE_Name[0] = 'A';
   BLE_Name[1] = 'N';
   BLE_Name[2] = '-';

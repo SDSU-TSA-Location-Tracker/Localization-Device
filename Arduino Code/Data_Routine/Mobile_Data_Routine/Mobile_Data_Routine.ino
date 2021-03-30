@@ -1,5 +1,4 @@
-#include <ArduinoBLE.h>
-#include <Wire.h>
+#include <ArduinoBLE.h>                                                                    
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -14,12 +13,12 @@ const byte INTERNAL_LED = 13;
 const byte PUSH_BUTTON_SUBMIT = 3;
 const byte PUSH_BUTTON_LOC = 9;
 
-volatile char AnchorAZeroRSSI;
-volatile char AnchorAFourRSSI;
-volatile char AnchorEZeroRSSI;
-volatile char AnchorEFourRSSI;
+volatile int AnchorAZeroRSSI;
+volatile int AnchorAFourRSSI;
+volatile int AnchorEZeroRSSI;
+volatile int AnchorEFourRSSI;
 volatile char currentLocation[3] = {"A0"};
-volatile byte locationIndex;
+volatile int locationIndex = 0;
 
 // Variables will change:
 int ledState = HIGH;         // the current state of the output pin
@@ -45,29 +44,21 @@ void anchorScan(void)
 {
   BLE.scan(); // scan for all BLE devices in prox
   BLEDevice remote = BLE.available();
-  if(remote.localName()=="AN-A0-NA")
+  if (remote.localName() == "AN-A0-NA")
   {
     AnchorAZeroRSSI = remote.rssi();
-    Serial.print("AN-A0-AN\t");
-    Serial.print(AnchorAZeroRSSI);
   }
-  if(remote.localName()=="AN-A4-NA")
+  if (remote.localName() == "AN-A4-NA")
   {
     AnchorAFourRSSI = remote.rssi();
-    Serial.print("AN-A4-AN\t");
-    Serial.print(AnchorAFourRSSI);
   }
-  if(remote.localName()=="AN-E0-NA")
+  if (remote.localName() == "AN-E0-NA")
   {
     AnchorEZeroRSSI = remote.rssi();
-    Serial.print("AN-E0-AN\t");
-    Serial.print(AnchorEZeroRSSI);
   }
-    if(remote.localName()=="AN-E4-NA")
+  if (remote.localName() == "AN-E4-NA")
   {
     AnchorEFourRSSI = remote.rssi();
-    Serial.print("AN-E4-AN\t");
-    Serial.print(AnchorEFourRSSI);
   }
 }
 
@@ -93,22 +84,22 @@ int debounce(int pinDebounce, int lastButtonState)
     if (reading != buttonState) {
       buttonState = reading;
 
-      if (buttonState == HIGH && pinDebounce==PUSH_BUTTON_LOC) 
+      if (buttonState == HIGH && pinDebounce == PUSH_BUTTON_LOC)
       {
         buttonAction('A');
-        digitalWrite(INTERNAL_LED,HIGH);
-        digitalWrite(EXTERNAL_LED,LOW);
+        digitalWrite(INTERNAL_LED, HIGH);
+        digitalWrite(EXTERNAL_LED, LOW);
       }
-      else if(buttonState == HIGH && pinDebounce==PUSH_BUTTON_SUBMIT)
+      else if (buttonState == HIGH && pinDebounce == PUSH_BUTTON_SUBMIT)
       {
         buttonAction('B');
-        digitalWrite(EXTERNAL_LED,HIGH);
-        digitalWrite(INTERNAL_LED,LOW);
+        digitalWrite(EXTERNAL_LED, HIGH);
+        digitalWrite(INTERNAL_LED, LOW);
       }
-      else if(buttonState == LOW)
+      else if (buttonState == LOW)
       {
         digitalWrite(EXTERNAL_LED, LOW);
-        digitalWrite(INTERNAL_LED,LOW);
+        digitalWrite(INTERNAL_LED, LOW);
       }
     }
   }
@@ -117,28 +108,29 @@ int debounce(int pinDebounce, int lastButtonState)
 
 void buttonAction(char Mode)
 {
+  int i;
   switch (Mode) {
     case 'A':
       // update current location to next grid spot
       locationIndex++;
-      locationIndex%=25;
+      locationIndex %= 25;
       currentLocation[0] = locationArray[locationIndex][0];
       currentLocation[1] = locationArray[locationIndex][1];
       break;
     case 'B':
       // Send the current location and rssi anchor samples over serial
       digitalWrite(EXTERNAL_LED, HIGH);
-      Serial.print(currentLocation[0]);
-      Serial.print(currentLocation[1]);
-      Serial.print("\t");
-      Serial.print(AnchorAZeroRSSI);
-      Serial.print("\t");
-      Serial.print(AnchorEZeroRSSI);
-      Serial.print("\t");
-      Serial.print(AnchorAFourRSSI);
-      Serial.print("\t");
-      Serial.print(AnchorEFourRSSI);
-      Serial.print("\n");
+        Serial.print(currentLocation[0]);
+        Serial.print(currentLocation[1]);
+        Serial.print("\t");
+        Serial.print(AnchorAZeroRSSI);
+        Serial.print("\t");
+        Serial.print(AnchorEZeroRSSI);
+        Serial.print("\t");
+        Serial.print(AnchorAFourRSSI);
+        Serial.print("\t");
+        Serial.print(AnchorEFourRSSI);
+        Serial.print("\n");
       digitalWrite(EXTERNAL_LED, HIGH);
       break;
     default:
@@ -147,25 +139,25 @@ void buttonAction(char Mode)
   }
 }
 
-void updateDisplay(){
-      display.clearDisplay();
-      display.setCursor(0, 0);
-      display.print("Grid Location: ");
-      display.print(currentLocation[0]);
-      display.print(currentLocation[1]);
-      display.setCursor(0, 17);
-      display.print("AnchorA0: ");
-      display.print(AnchorAZeroRSSI);
-      display.setCursor(0, 27);
-      display.print("AnchorE0: ");
-      display.print(AnchorEZeroRSSI);
-      display.setCursor(0, 37);
-      display.print("AnchorA4: ");
-      display.print(AnchorAFourRSSI);
-      display.setCursor(0, 47);
-      display.print("AnchorE4: ");
-      display.print(AnchorEFourRSSI);
-      display.display();
+void updateDisplay() {
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.print("Grid Location: ");
+  display.print(currentLocation[0]);
+  display.print(currentLocation[1]);
+  display.setCursor(0, 17);
+  display.print("AnchorA0: ");
+  display.print(AnchorAZeroRSSI);
+  display.setCursor(0, 27);
+  display.print("AnchorE0: ");
+  display.print(AnchorEZeroRSSI);
+  display.setCursor(0, 37);
+  display.print("AnchorA4: ");
+  display.print(AnchorAFourRSSI);
+  display.setCursor(0, 47);
+  display.print("AnchorE4: ");
+  display.print(AnchorEFourRSSI);
+  display.display();
 }
 
 void setup() {
@@ -197,7 +189,6 @@ void setup() {
   pinMode(PUSH_BUTTON_SUBMIT, INPUT);
   pinMode(PUSH_BUTTON_LOC, INPUT);
 
-
   locationIndex = 0; // starting location index will be 0 which is A0
 
   digitalWrite(EXTERNAL_LED, LOW);
@@ -211,11 +202,7 @@ void setup() {
 
 
 void loop() {
-  // Get a poll for each the prenamed anchor devices
-  // Measure the RSSI values from each anchor and save it
-
   anchorScan();
-  
   lastLocationState = debounce(PUSH_BUTTON_LOC, lastLocationState);
   updateDisplay();
   lastSubmitState = debounce(PUSH_BUTTON_SUBMIT, lastSubmitState);

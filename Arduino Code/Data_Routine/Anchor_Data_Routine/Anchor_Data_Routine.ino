@@ -4,9 +4,9 @@
 const int INTERNAL_LED = 13;
 const int EXTERNAL_LED = 2;
 const int PUSH_BUTTON = 3;
-const int SWITCH_MODE_A = 12;
-const int SWITCH_MODE_B = 11;
-const int SWITCH_MODE_C = 10;
+const int SWITCH_MODE_A = 10;
+const int SWITCH_MODE_B = 9;
+const int SWITCH_MODE_C = 8;
 
 volatile char ButtonMode;
 volatile char currentLocation[3] = {"A0"};
@@ -18,11 +18,13 @@ int ledState = HIGH;         // the current state of the output pin
 int buttonState;             // the current reading from the input pin
 int lastReadingState = LOW;   // the previous reading from the input pin
 
+int delayTime = 250;
+unsigned long currentTime = 0;
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
 long unsigned int lastDebounceTime = 0;  // the last time the output pin was toggled
-long unsigned int debounceDelay = 50;    // the debounce time; increase if the output flickers
+long unsigned int debounceDelay = 40;    // the debounce time; increase if the output flickers
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -56,27 +58,16 @@ int debounce(int pinDebounce, int lastButtonState)
       if (buttonState == HIGH && ButtonMode == 'A')
       {
         buttonAction();
-        digitalWrite(INTERNAL_LED, HIGH);
-        digitalWrite(EXTERNAL_LED, LOW);
       }
       else if (buttonState == HIGH && ButtonMode == 'B')
       {
         buttonAction();
-        digitalWrite(EXTERNAL_LED, HIGH);
-        digitalWrite(INTERNAL_LED, HIGH);
       }
       else if (buttonState == HIGH && ButtonMode == 'C')
       {
-        anchorName[3] = 'E';
-        anchorName[4] = '4';
+        anchorName[3] = currentLocation[0];
+        anchorName[4] = currentLocation[1];
         buttonAction();
-        digitalWrite(EXTERNAL_LED, LOW);
-        digitalWrite(INTERNAL_LED, HIGH);
-      }
-      else if (buttonState == LOW)
-      {
-        digitalWrite(EXTERNAL_LED, LOW);
-        digitalWrite(INTERNAL_LED, LOW);
       }
     }
   }
@@ -97,14 +88,10 @@ void buttonAction()
       Serial.print("\n");
       break;
     case 'B':
-      locationIndex = locationIndex + 5;
-      locationIndex %= 25;
-      currentLocation[0] = locationArray[locationIndex][0];
-      currentLocation[1] = locationArray[locationIndex][1];
-      Serial.print("Current Location: ");
-      Serial.print(currentLocation[0]);
-      Serial.print(currentLocation[1]);
-      Serial.print("\n");
+      digitalWrite(EXTERNAL_LED, HIGH);
+      currentTime = millis();
+      while (millis() < currentTime + 500);
+      digitalWrite(EXTERNAL_LED, LOW);
       break;
     case 'C':
       BLE.stopAdvertise();
@@ -141,28 +128,29 @@ void setup() {
   pinMode(SWITCH_MODE_B, INPUT);
   pinMode(SWITCH_MODE_C, INPUT);
 
-  ButtonMode = 'A'; // default to single location increment mode
-
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_A), cycleRowState, RISING);
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_B), cycleColState, RISING);
-  attachInterrupt(digitalPinToInterrupt(SWITCH_MODE_C), resetLocState, RISING);
+  ButtonMode = 'C'; // default to single location increment mode
 
   BLEroutine();
 }
 
 void loop() {
   lastReadingState = debounce(PUSH_BUTTON, lastReadingState);
-  delay(1000);
-}
+  if (digitalRead(SWITCH_MODE_A) == HIGH && ButtonMode != 'A')
+  {
+    Serial.println("Reset Location Service State");
+    ButtonMode = 'A';
+  }
 
-void cycleRowState() {
-  ButtonMode = 'A';
-}
-
-void cycleColState() {
-  ButtonMode = 'B';
-}
-
-void resetLocState() {
-  ButtonMode = 'C';
+  if (digitalRead(SWITCH_MODE_B) == HIGH && ButtonMode != 'B')
+  {
+    Serial.println("Battery Test State");
+    ButtonMode = 'B';
+  }
+  if (digitalRead(SWITCH_MODE_C) == HIGH && ButtonMode != 'C')
+  {
+    Serial.println("Cycle Row State");
+    ButtonMode = 'C';
+  }
+  currentTime = millis();
+  while (millis() < currentTime + delayTime); // delay without interrupt conflict
 }
