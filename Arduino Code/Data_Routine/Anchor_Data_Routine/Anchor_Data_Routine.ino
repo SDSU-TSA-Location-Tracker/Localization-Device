@@ -55,18 +55,8 @@ int debounce(int pinDebounce, int lastButtonState)
     if (reading != buttonState) {
       buttonState = reading;
 
-      if (buttonState == HIGH && ButtonMode == 'A')
+      if (buttonState == HIGH)
       {
-        buttonAction();
-      }
-      else if (buttonState == HIGH && ButtonMode == 'B')
-      {
-        buttonAction();
-      }
-      else if (buttonState == HIGH && ButtonMode == 'C')
-      {
-        anchorName[3] = currentLocation[0];
-        anchorName[4] = currentLocation[1];
         buttonAction();
       }
     }
@@ -95,6 +85,8 @@ void buttonAction()
       break;
     case 'C':
       BLE.stopAdvertise();
+      anchorName[3] = currentLocation[0];
+      anchorName[4] = currentLocation[1];
       BLEroutine();
       break;
     default:
