@@ -9,8 +9,8 @@ const int SWITCH_MODE_B = 9;
 const int SWITCH_MODE_C = 8;
 
 volatile char ButtonMode;
-volatile char currentLocation[3] = {"A0"};
-char anchorName[9] = {"AN-A0-NA"};
+volatile char currentLocation[3] = {"E4"};
+char anchorName[9] = {"AN-E4-NA"};
 volatile byte locationIndex;
 
 // Variables will change:
