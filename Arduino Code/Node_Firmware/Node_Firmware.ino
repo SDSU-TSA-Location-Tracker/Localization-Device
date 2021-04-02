@@ -10,9 +10,9 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
-volatile char currentLocation[3] = "A0";
+volatile char currentLocation[3] = "E4";
 volatile byte locationIndex = 0;
-char BLE_Name[9] = "AN-A0-NA";
+char BLE_Name[9] = "AN-E4-NA";
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -43,7 +43,7 @@ BLEByteCharacteristic IndexCharB("87adced8-7bf9-11eb-9439-0242ac130002", BLERead
 BLEByteCharacteristic RSSICharB("87adced7-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
 BLECharCharacteristic GenderCharB("87adced6-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
 
-BLEDevice scannedNode;
+//BLEDevice scannedNode;
 
 int debounce(int pinDebounce, int lastButtonState)
 {
@@ -81,8 +81,8 @@ void buttonAction()
   digitalWrite(EXTERNAL_LED, HIGH);
   switch (ButtonMode) {
     case 'A':
-      locationIndex++;
-      locationIndex %= 25;
+      //locationIndex++;
+      //locationIndex %= 25;
       currentLocation[0] = locationArray[locationIndex][0];
       currentLocation[1] = locationArray[locationIndex][1];
       BLE_Name[3] = currentLocation[0];
@@ -168,19 +168,19 @@ void mobileFemale(void) {
 
 void anchor(void) {
   Serial.println("Anchor Initialize");
-//  BLE.end();
-//  if (!BLE.begin())
-//  {
-//    Serial.println("Starting Anchor BLE Failed!");
-//    while (1)
-//    {
-//      digitalWrite(EXTERNAL_LED, ledState);
-//      if (currentMillis - previousMillis >= 500) {
-//        previousMillis = currentMillis;
-//        ledState != ledState;
-//      }
-//    }
-//  }
+  //  BLE.end();
+  //  if (!BLE.begin())
+  //  {
+  //    Serial.println("Starting Anchor BLE Failed!");
+  //    while (1)
+  //    {
+  //      digitalWrite(EXTERNAL_LED, ledState);
+  //      if (currentMillis - previousMillis >= 500) {
+  //        previousMillis = currentMillis;
+  //        ledState != ledState;
+  //      }
+  //    }
+  //  }
   BLE_Name[0] = 'A';
   BLE_Name[1] = 'N';
   BLE_Name[6] = 'N';
@@ -233,6 +233,7 @@ void setup() {
       }
     }
   }
+  anchor();
 }
 
 void loop() {
@@ -246,32 +247,39 @@ void loop() {
       ButtonMode = 'A';
     }
     BLE.scan();
-    scannedNode = BLE.available();
-    if (scannedNode.localName() = "MO-00-MA")
+    BLEDevice scannedNode = BLE.available();
+    if (scannedNode.localName() == "MO-00-MA")
     {
+      Serial.println(scannedNode.localName());
+      Serial.println(scannedNode.rssi());
       IndexCharA.writeValue((byte)0x00);
       RSSICharA.writeValue((int)scannedNode.rssi());
       GenderCharA.writeValue((char)'M');
     }
-    if (scannedNode.localName() = "MO-01-MA")
+    if (scannedNode.localName() == "MO-01-MA")
     {
+      Serial.println(scannedNode.localName());
+      Serial.println(scannedNode.rssi());
       IndexCharB.writeValue((byte)0x01);
       RSSICharB.writeValue((int)scannedNode.rssi());
       GenderCharB.writeValue((char)'M');
     }
-    if (scannedNode.localName() = "MO-00-FE")
+    if (scannedNode.localName() == "MO-00-FE")
     {
+      Serial.println(scannedNode.localName());
+      Serial.println(scannedNode.rssi());
       IndexCharA.writeValue((byte)0x00);
       RSSICharA.writeValue((int)scannedNode.rssi());
       GenderCharA.writeValue((char)'F');
     }
-    if (scannedNode.localName() = "MO-01-FE")
+    if (scannedNode.localName() == "MO-01-FE")
     {
+      Serial.println(scannedNode.localName());
+      Serial.println(scannedNode.rssi());
       IndexCharB.writeValue((byte)0x01);
       RSSICharB.writeValue((int)scannedNode.rssi());
       GenderCharB.writeValue((char)'F');
     }
-    BLE.stopScan();
   }
   if (digitalRead(SWITCH_MODE_M) == HIGH && ButtonMode != 'M')
   {
