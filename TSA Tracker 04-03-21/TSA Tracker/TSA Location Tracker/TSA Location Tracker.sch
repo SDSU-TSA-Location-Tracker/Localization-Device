@@ -1,0 +1,385 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "TSA Location Tracker"
+Date "2021-02-08"
+Rev "A"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Connection ~ 2900 1600
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 6027A06A
+P 2900 1600
+F 0 "#FLG0101" H 2900 1675 50  0001 C CNN
+F 1 "PWR_FLAG" H 2900 1773 50  0000 C CNN
+F 2 "" H 2900 1600 50  0001 C CNN
+F 3 "~" H 2900 1600 50  0001 C CNN
+	1    2900 1600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 2925 5500 1375
+Wire Wire Line
+	4050 1550 4050 1800
+Wire Wire Line
+	4050 2000 4050 2250
+$Comp
+L Device:R R3
+U 1 1 60248B4C
+P 4975 1550
+F 0 "R3" V 5150 1500 50  0000 L CNN
+F 1 "10k" V 5075 1475 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4905 1550 50  0001 C CNN
+F 3 "~" H 4975 1550 50  0001 C CNN
+	1    4975 1550
+	0    -1   -1   0   
+$EndComp
+Connection ~ 2900 2425
+Wire Wire Line
+	2900 2425 2900 2475
+$Comp
+L power:GND #PWR0105
+U 1 1 6027D46A
+P 2900 2475
+F 0 "#PWR0105" H 2900 2225 50  0001 C CNN
+F 1 "GND" H 2905 2302 50  0000 C CNN
+F 2 "" H 2900 2475 50  0001 C CNN
+F 3 "" H 2900 2475 50  0001 C CNN
+	1    2900 2475
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 2150 2900 2425
+Connection ~ 2900 2150
+Connection ~ 2900 1875
+Wire Wire Line
+	2900 1875 2900 2150
+Wire Wire Line
+	2900 1600 2900 1875
+$Comp
+L Mechanical:MountingHole_Pad H4
+U 1 1 6027AD61
+P 2800 2425
+F 0 "H4" V 2800 2650 50  0001 C CNN
+F 1 "MountingHole_Pad" H 2900 2383 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2800 2425 50  0001 C CNN
+F 3 "~" H 2800 2425 50  0001 C CNN
+	1    2800 2425
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H3
+U 1 1 6027A62A
+P 2800 2150
+F 0 "H3" V 2800 2375 50  0001 C CNN
+F 1 "MountingHole_Pad" H 2900 2108 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2800 2150 50  0001 C CNN
+F 3 "~" H 2800 2150 50  0001 C CNN
+	1    2800 2150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H2
+U 1 1 60279E05
+P 2800 1875
+F 0 "H2" V 2800 2100 50  0001 C CNN
+F 1 "MountingHole_Pad" H 2900 1833 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2800 1875 50  0001 C CNN
+F 3 "~" H 2800 1875 50  0001 C CNN
+	1    2800 1875
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H1
+U 1 1 602781CC
+P 2800 1600
+F 0 "H1" V 2800 1825 50  0001 C CNN
+F 1 "MountingHole_Pad" H 2900 1558 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2800 1600 50  0001 C CNN
+F 3 "~" H 2800 1600 50  0001 C CNN
+	1    2800 1600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5700 2475 5700 2925
+Wire Wire Line
+	6700 2475 5700 2475
+Wire Wire Line
+	6700 2400 6700 2475
+Wire Wire Line
+	5600 2400 5600 2925
+Wire Wire Line
+	6225 2400 5600 2400
+$Comp
+L power:GND #PWR0104
+U 1 1 60270A4B
+P 3160 4620
+F 0 "#PWR0104" H 3160 4370 50  0001 C CNN
+F 1 "GND" H 3165 4447 50  0000 C CNN
+F 2 "" H 3160 4620 50  0001 C CNN
+F 3 "" H 3160 4620 50  0001 C CNN
+	1    3160 4620
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6700 2050 6700 2100
+Wire Wire Line
+	6225 2050 6700 2050
+Wire Wire Line
+	6225 2100 6225 2050
+Wire Wire Line
+	7050 1375 7250 1375
+$Comp
+L Switch:SW_SP3T Mode_Switch1
+U 1 1 60250F9E
+P 3850 1900
+F 0 "Mode_Switch1" H 3650 2100 50  0000 C CNN
+F 1 "SW_SP3T" H 3850 2092 50  0001 C CNN
+F 2 "EG1313:E-Switch-EG1313-0" H 3225 2075 50  0001 C CNN
+F 3 "~" H 3225 2075 50  0001 C CNN
+	1    3850 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_SPST LED_Switch1
+U 1 1 60269480
+P 6850 1375
+F 0 "LED_Switch1" H 6850 1518 50  0000 C CNN
+F 1 "SW_SPST" H 6850 1519 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm" H 6850 1375 50  0001 C CNN
+F 3 "~" H 6850 1375 50  0001 C CNN
+	1    6850 1375
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 6025C5AE
+P 6700 2250
+F 0 "D1" V 6750 2125 50  0000 C CNN
+F 1 "LED" V 6650 2100 50  0000 C CNN
+F 2 "LED_THT:LED_D3.0mm" H 6700 2250 50  0001 C CNN
+F 3 "~" H 6700 2250 50  0001 C CNN
+	1    6700 2250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5225 2250 5225 2300
+Wire Wire Line
+	5125 2250 5225 2250
+Wire Wire Line
+	5225 1550 5225 1575
+Wire Wire Line
+	5125 1550 5225 1550
+Wire Wire Line
+	5225 1900 5225 1950
+Wire Wire Line
+	5125 1900 5225 1900
+$Comp
+L power:GND #PWR0103
+U 1 1 6025860A
+P 5225 1575
+F 0 "#PWR0103" H 5225 1325 50  0001 C CNN
+F 1 "GND" H 5230 1402 50  0000 C CNN
+F 2 "" H 5225 1575 50  0001 C CNN
+F 3 "" H 5225 1575 50  0001 C CNN
+	1    5225 1575
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 60257C3D
+P 5225 1950
+F 0 "#PWR0102" H 5225 1700 50  0001 C CNN
+F 1 "GND" H 5230 1777 50  0000 C CNN
+F 2 "" H 5225 1950 50  0001 C CNN
+F 3 "" H 5225 1950 50  0001 C CNN
+	1    5225 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 60257134
+P 5225 2300
+F 0 "#PWR0101" H 5225 2050 50  0001 C CNN
+F 1 "GND" H 5230 2127 50  0000 C CNN
+F 2 "" H 5225 2300 50  0001 C CNN
+F 3 "" H 5225 2300 50  0001 C CNN
+	1    5225 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 60248DB2
+P 5870 1645
+F 0 "R5" H 5940 1691 50  0000 L CNN
+F 1 "10k" H 5940 1600 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5800 1645 50  0001 C CNN
+F 3 "~" H 5870 1645 50  0001 C CNN
+	1    5870 1645
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 60248CF4
+P 6225 2250
+F 0 "R4" H 6295 2296 50  0000 L CNN
+F 1 "330" H 6295 2205 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6155 2250 50  0001 C CNN
+F 3 "~" H 6225 2250 50  0001 C CNN
+	1    6225 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 602489B3
+P 4975 1900
+F 0 "R2" V 5125 1850 50  0000 L CNN
+F 1 "10k" V 5050 1825 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4905 1900 50  0001 C CNN
+F 3 "~" H 4975 1900 50  0001 C CNN
+	1    4975 1900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 60247EA8
+P 4975 2250
+F 0 "R1" V 5150 2200 50  0000 L CNN
+F 1 "10k" V 5075 2175 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4905 2250 50  0001 C CNN
+F 3 "~" H 4975 2250 50  0001 C CNN
+	1    4975 2250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5150 4900 4800 4900
+Wire Wire Line
+	4800 4650 3900 4650
+$Comp
+L Arduino-nano-33:Arduino-NANO-33 Arduino1
+U 1 1 6021B026
+P 5300 3425
+F 0 "Arduino1" H 5300 4490 50  0000 C CNN
+F 1 "Arduino-NANO-33" H 5300 4399 50  0001 C CNN
+F 2 "ANano_33:NANO_33_Socket_Castell" H 4975 3325 50  0001 C CNN
+F 3 "~" H 4975 3325 50  0001 C CNN
+	1    5300 3425
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Switch:SW_DPDT_x2 Power_Switch1
+U 1 1 60298CCA
+P 5350 4900
+F 0 "Power_Switch1" H 5355 4680 50  0000 C CNN
+F 1 "SW_DPDT_x2" H 5350 5094 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_CuK_JS202011AQN_DPDT_Angled" H 5350 4900 50  0001 C CNN
+F 3 "~" H 5350 4900 50  0001 C CNN
+	1    5350 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3900 4650 3900 4750
+$Comp
+L AdafruitCharger:AdafruitCharger U1
+U 1 1 602A748A
+P 3500 4900
+F 0 "U1" H 3978 4954 50  0000 L CNN
+F 1 "AdafruitCharger" H 3978 4863 50  0000 L CNN
+F 2 "Adafruit MiniLipo:AdafruitMiniLipo" H 3750 5350 50  0001 C CNN
+F 3 "" H 3750 5350 50  0001 C CNN
+	1    3500 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3160 4620 3160 4395
+Wire Wire Line
+	3160 4395 3700 4395
+Wire Wire Line
+	3700 4395 3700 4750
+$Comp
+L power:GND #PWR0108
+U 1 1 602BAE70
+P 5870 1890
+F 0 "#PWR0108" H 5870 1640 50  0001 C CNN
+F 1 "GND" H 5875 1717 50  0000 C CNN
+F 2 "" H 5870 1890 50  0001 C CNN
+F 3 "" H 5870 1890 50  0001 C CNN
+	1    5870 1890
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 1375 5870 1375
+Wire Wire Line
+	5870 1495 5870 1375
+Connection ~ 5870 1375
+Wire Wire Line
+	5870 1795 5870 1890
+Wire Wire Line
+	4050 2250 4755 2250
+Wire Wire Line
+	4755 2250 4755 2705
+Wire Wire Line
+	4755 2705 5000 2705
+Wire Wire Line
+	5000 2705 5000 2925
+Connection ~ 4755 2250
+Wire Wire Line
+	4755 2250 4825 2250
+Wire Wire Line
+	4050 1900 4675 1900
+Wire Wire Line
+	4675 1900 4675 2775
+Wire Wire Line
+	4675 2775 4900 2775
+Wire Wire Line
+	4900 2775 4900 2925
+Connection ~ 4675 1900
+Wire Wire Line
+	4675 1900 4825 1900
+Wire Wire Line
+	4050 1550 4595 1550
+Wire Wire Line
+	4595 1550 4595 2845
+Wire Wire Line
+	4595 2845 4800 2845
+Wire Wire Line
+	4800 2845 4800 2925
+Connection ~ 4595 1550
+Wire Wire Line
+	4595 1550 4825 1550
+Wire Wire Line
+	5900 3925 5900 4395
+Wire Wire Line
+	5900 4395 3700 4395
+Connection ~ 3700 4395
+Wire Wire Line
+	5870 1375 6650 1375
+Wire Wire Line
+	7250 1375 7250 4025
+Wire Wire Line
+	4800 4650 4800 4900
+Wire Wire Line
+	3650 1900 3650 925 
+Wire Wire Line
+	3650 925  7250 925 
+Wire Wire Line
+	7250 925  7250 1375
+Connection ~ 7250 1375
+Wire Wire Line
+	7250 4025 4700 4025
+Wire Wire Line
+	4700 4025 4700 3925
+Wire Wire Line
+	5550 5000 7250 5000
+Wire Wire Line
+	7250 5000 7250 4025
+Connection ~ 7250 4025
+$EndSCHEMATC
