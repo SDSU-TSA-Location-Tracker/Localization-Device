@@ -1,4 +1,4 @@
-#include <ArduinoBLE.h>                                                                    
+ #include <ArduinoBLE.h>                                                                    
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -46,7 +46,6 @@ void anchorScan(void)
   BLEDevice remote = BLE.available();
   if (remote.localName() == "AN-A0-NA")
   {
-    Serial.println(remote.rssi());
     AnchorAZeroRSSI = remote.rssi();
   }
   if (remote.localName() == "AN-A4-NA")

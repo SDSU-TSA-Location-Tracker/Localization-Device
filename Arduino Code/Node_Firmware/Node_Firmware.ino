@@ -10,9 +10,9 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
-volatile char currentLocation[3] = "E4";
+volatile char currentLocation[3] = "A0";
 volatile byte locationIndex = 0;
-char BLE_Name[9] = "AN-E4-NA";
+char BLE_Name[9] = "AN-A0-NA";
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -32,16 +32,16 @@ int ledState = HIGH;
 int buttonState;
 int lastReadingState = LOW;
 
-BLEService MobileServiceA("87adced0-7bf9-11eb-9439-0242ac130002");
-BLEService MobileServiceB("87adced9-7bf9-11eb-9439-0242ac130002");
-
-BLEByteCharacteristic IndexCharA("87adced1-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
-BLEByteCharacteristic RSSICharA("87adced2-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
-BLECharCharacteristic GenderCharA("87adced3-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
-
-BLEByteCharacteristic IndexCharB("87adced8-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
-BLEByteCharacteristic RSSICharB("87adced7-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
-BLECharCharacteristic GenderCharB("87adced6-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//BLEService MobileServiceA("87adced0-7bf9-11eb-9439-0242ac130002");
+//BLEService MobileServiceB("87adced9-7bf9-11eb-9439-0242ac130002");
+//
+//BLEByteCharacteristic IndexCharA("87adced1-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//BLEByteCharacteristic RSSICharA("87adced2-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//BLECharCharacteristic GenderCharA("87adced3-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//
+//BLEByteCharacteristic IndexCharB("87adced8-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//BLEByteCharacteristic RSSICharB("87adced7-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
+//BLECharCharacteristic GenderCharB("87adced6-7bf9-11eb-9439-0242ac130002", BLERead | BLEBroadcast | BLENotify);
 
 //BLEDevice scannedNode;
 
@@ -188,22 +188,22 @@ void anchor(void) {
   Serial.println(BLE_Name);
   BLE.setLocalName(BLE_Name);
   BLE.setDeviceName("Anchor Node");
-  BLE.addService(MobileServiceA);
-  MobileServiceA.addCharacteristic(IndexCharA);
-  MobileServiceA.addCharacteristic(RSSICharA);
-  MobileServiceA.addCharacteristic(GenderCharA);
-  BLE.setAdvertisedService(MobileServiceA);
-  BLE.addService(MobileServiceB);
-  MobileServiceB.addCharacteristic(IndexCharB);
-  MobileServiceB.addCharacteristic(RSSICharB);
-  MobileServiceB.addCharacteristic(GenderCharB);
-  BLE.setAdvertisedService(MobileServiceB);
-  IndexCharA.broadcast();
-  RSSICharA.broadcast();
-  GenderCharA.broadcast();
-  IndexCharB.broadcast();
-  RSSICharB.broadcast();
-  GenderCharB.broadcast();
+  //  BLE.addService(MobileServiceA);
+  //  MobileServiceA.addCharacteristic(IndexCharA);
+  //  MobileServiceA.addCharacteristic(RSSICharA);
+  //  MobileServiceA.addCharacteristic(GenderCharA);
+  //  BLE.setAdvertisedService(MobileServiceA);
+  //  BLE.addService(MobileServiceB);
+  //  MobileServiceB.addCharacteristic(IndexCharB);
+  //  MobileServiceB.addCharacteristic(RSSICharB);
+  //  MobileServiceB.addCharacteristic(GenderCharB);
+  //  BLE.setAdvertisedService(MobileServiceB);
+  //  IndexCharA.broadcast();
+  //  RSSICharA.broadcast();
+  //  GenderCharA.broadcast();
+  //  IndexCharB.broadcast();
+  //  RSSICharB.broadcast();
+  //  GenderCharB.broadcast();
   BLE.advertise();
 }
 
@@ -250,35 +250,50 @@ void loop() {
     BLEDevice scannedNode = BLE.available();
     if (scannedNode.localName() == "MO-00-MA")
     {
-      Serial.println(scannedNode.localName());
-      Serial.println(scannedNode.rssi());
-      IndexCharA.writeValue((byte)0x00);
-      RSSICharA.writeValue((int)scannedNode.rssi());
-      GenderCharA.writeValue((char)'M');
+      Serial.println("Detected M0-00-MA");
+      BLE.setLocalName("M0-00-MA");
+      uint8_t rssi = (uint8_t)(scannedNode.rssi());
+      BLE.setManufacturerData(&rssi, 1);
+      BLE.stopAdvertise();
+      BLE.advertise();
+      //      Serial.println(scannedNode.localName());
+      //      Serial.println(scannedNode.rssi());
+      //      IndexCharA.writeValue((byte)0x00);
+      //      RSSICharA.writeValue((int)scannedNode.rssi());
+      //      GenderCharA.writeValue((char)'M');
     }
     if (scannedNode.localName() == "MO-01-MA")
     {
-      Serial.println(scannedNode.localName());
-      Serial.println(scannedNode.rssi());
-      IndexCharB.writeValue((byte)0x01);
-      RSSICharB.writeValue((int)scannedNode.rssi());
-      GenderCharB.writeValue((char)'M');
+      BLE.setLocalName("M0-01-MA");
+      uint8_t rssi1 = (uint8_t)scannedNode.rssi();
+      BLE.setManufacturerData(&rssi1, 1);
+      //      Serial.println(scannedNode.localName());
+      //      Serial.println(scannedNode.rssi());
+      //      IndexCharB.writeValue((byte)0x01);
+      //      RSSICharB.writeValue((int)scannedNode.rssi());
+      //      GenderCharB.writeValue((char)'M');
     }
     if (scannedNode.localName() == "MO-00-FE")
     {
-      Serial.println(scannedNode.localName());
-      Serial.println(scannedNode.rssi());
-      IndexCharA.writeValue((byte)0x00);
-      RSSICharA.writeValue((int)scannedNode.rssi());
-      GenderCharA.writeValue((char)'F');
+      BLE.setLocalName("M0-00-FE");
+      uint8_t rssi2 = (uint8_t)(scannedNode.rssi());
+      BLE.setManufacturerData(&rssi2, 1);
+      //      Serial.println(scannedNode.localName());
+      //      Serial.println(scannedNode.rssi());
+      //      IndexCharA.writeValue((byte)0x00);
+      //      RSSICharA.writeValue((int)scannedNode.rssi());
+      //      GenderCharA.writeValue((char)'F');
     }
     if (scannedNode.localName() == "MO-01-FE")
     {
-      Serial.println(scannedNode.localName());
-      Serial.println(scannedNode.rssi());
-      IndexCharB.writeValue((byte)0x01);
-      RSSICharB.writeValue((int)scannedNode.rssi());
-      GenderCharB.writeValue((char)'F');
+      BLE.setLocalName("M0-00-FE");
+      uint8_t rssi3 = (uint8_t)(scannedNode.rssi());
+      BLE.setManufacturerData(&rssi3, 1);
+      //      Serial.println(scannedNode.localName());
+      //      Serial.println(scannedNode.rssi());
+      //      IndexCharB.writeValue((byte)0x01);
+      //      RSSICharB.writeValue((int)scannedNode.rssi());
+      //      GenderCharB.writeValue((char)'F');
     }
   }
   if (digitalRead(SWITCH_MODE_M) == HIGH && ButtonMode != 'M')
