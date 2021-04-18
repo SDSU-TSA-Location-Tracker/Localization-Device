@@ -10,9 +10,9 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
-volatile char currentLocation[3] = "E0";
-volatile byte locationIndex = 20;
-char BLE_Name[9] = "AN-E0-NA";
+volatile char currentLocation[3] = "A4";
+volatile byte locationIndex = 4;
+char BLE_Name[9] = "AN-A4-NA";
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -33,6 +33,8 @@ int scanCount = 0;
 int ledState = HIGH;
 int buttonState;
 int lastReadingState = LOW;
+
+bool scanState = true;
 
 byte scannedMobileData[4] = {0x00, 0x00, 0x00, 0x00};
 
@@ -100,7 +102,6 @@ void mobileMale(void) {
   BLE_Name[7] = 'A';
   BLE.stopAdvertise();
   BLE.setLocalName(BLE_Name);
-  BLE.setDeviceName("Mobile Node");
   BLE.setManufacturerData(0, 1);
   BLE.advertise();
 }
@@ -114,7 +115,6 @@ void mobileFemale(void) {
   BLE_Name[7] = 'E';
   BLE.stopAdvertise();
   BLE.setLocalName(BLE_Name);
-  BLE.setDeviceName("Mobile Node");
   BLE.setManufacturerData(0, 1);
   BLE.advertise();
 }
@@ -128,7 +128,6 @@ void anchor(void) {
   BLE_Name[7] = 'A';
   BLE.stopAdvertise();
   BLE.setLocalName(BLE_Name);
-  BLE.setDeviceName("Anchor Node");
   BLE.advertise();
 }
 
@@ -154,7 +153,7 @@ void setup() {
       }
     }
   }
-  //BLE.debug(Serial);
+  BLE.debug(Serial);
 }
 
 void loop() {
@@ -166,51 +165,54 @@ void loop() {
       lastButtonMode = ButtonMode;
       ButtonMode = 'A';
       anchor();
-      BLE.scan();
     }
-    scanCount++;
-    if(scanCount>=1000)
+    if (scanState)
     {
-      BLE.stopScan();
+      digitalWrite(EXTERNAL_LED, HIGH);
+      BLE.stopAdvertise();
+      BLE.scan();
       currentMillis = millis();
-      while(millis()<(currentMillis+period));
-      scanCount=0;
-      BLE.scan();
-    }
-    scannedNode = BLE.available();
-    if (scannedNode.localName() == "MO-00-MA")
-    {
-      if (scannedMobileData[1] != (byte)scannedNode.rssi())
+      while (millis() < (currentMillis + period))
       {
-        scannedMobileData[0] = 0x11;
-        scannedMobileData[1] = (byte)scannedNode.rssi();
-        BLE.stopAdvertise();
-        BLE.setManufacturerData(scannedMobileData, 4);
-        BLE.advertise();
+        scannedNode = BLE.available();
+        if (scannedNode.localName() == "MO-00-MA")
+        {
+          if (scannedMobileData[1] != (byte)scannedNode.rssi())
+          {
+            scannedMobileData[0] = 0x11;
+            scannedMobileData[1] = (byte)scannedNode.rssi();
+            BLE.setManufacturerData(scannedMobileData, 4);
+          }
+        }
+        if (scannedNode.localName() == "MO-00-FE")
+        {
+          if (scannedMobileData[3] != (byte)scannedNode.rssi())
+          {
+            scannedMobileData[2] = 0x11;
+            scannedMobileData[3] = (byte)scannedNode.rssi();
+            BLE.setManufacturerData(scannedMobileData, 4);
+          }
+        }
       }
+      scanState = !scanState;
+      BLE.stopScan();
+      digitalWrite(EXTERNAL_LED, LOW);
+      BLE.advertise();
+      currentMillis = millis();
     }
-    if (scannedNode.localName() == "MO-00-FE")
+    if (millis() > (currentMillis + period))
     {
-      if (scannedMobileData[3] != (byte)scannedNode.rssi())
-      {
-        scannedMobileData[2] = 0x11;
-        scannedMobileData[3] = (byte)scannedNode.rssi();
-        BLE.stopAdvertise();
-        BLE.setManufacturerData(scannedMobileData, 4);
-        BLE.advertise();
-      }
+      scanState = !scanState;
     }
   }
   if (digitalRead(SWITCH_MODE_M) == HIGH && ButtonMode != 'M')
   {
-    BLE.stopScan();
     lastButtonMode = ButtonMode;
     ButtonMode = 'M';
     mobileMale();
   }
   if (digitalRead(SWITCH_MODE_F) == HIGH && ButtonMode != 'F')
   {
-    BLE.stopScan();
     lastButtonMode = ButtonMode;
     ButtonMode = 'F';
     mobileFemale();
