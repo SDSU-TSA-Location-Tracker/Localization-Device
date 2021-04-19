@@ -10,9 +10,9 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
-volatile char currentLocation[3] = "A4";
-volatile byte locationIndex = 4;
-char BLE_Name[9] = "AN-A4-NA";
+volatile char currentLocation[3] = "A0";
+volatile byte locationIndex = 0;
+char BLE_Name[9] = "AN-A0-NA";
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -140,10 +140,9 @@ void setup() {
   pinMode(EXTERNAL_LED, OUTPUT);
 
   digitalWrite(EXTERNAL_LED, LOW);
-
+  
   if (!BLE.begin())
   {
-    //Serial.println("Starting Anchor BLE Failed!");
     while (1)
     {
       digitalWrite(EXTERNAL_LED, ledState);
@@ -158,7 +157,7 @@ void setup() {
 
 void loop() {
   lastReadingState = debounce(PUSH_BUTTON, lastReadingState);
-  if (digitalRead(SWITCH_MODE_A) == HIGH)
+  if (digitalRead(SWITCH_MODE_A)==HIGH)
   {
     if (ButtonMode != 'A')
     {
