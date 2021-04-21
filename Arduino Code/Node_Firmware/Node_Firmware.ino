@@ -10,9 +10,9 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
-volatile char currentLocation[3] = "A0";
-volatile byte locationIndex = 0;
-char BLE_Name[9] = "AN-A0-NA";
+volatile char currentLocation[3] = "E0";
+volatile byte locationIndex = 20;
+char BLE_Name[9] = "AN-E0-NA";
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -152,7 +152,7 @@ void setup() {
       }
     }
   }
-  BLE.debug(Serial);
+  BLE.setManufacturerData(scannedMobileData, 4);
 }
 
 void loop() {
