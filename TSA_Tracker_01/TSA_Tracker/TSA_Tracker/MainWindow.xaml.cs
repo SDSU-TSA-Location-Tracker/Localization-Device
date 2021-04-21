@@ -45,8 +45,8 @@ namespace TSA_Tracker
             BlankReplayGrid();
 
             //Create client for MQTT broker.
-            MqttClient mqttClient = new MqttClient("192.168.1.232");
-            data = "MQTT Client installed and connected to Holistic node with broker: 192.168.1.232";
+            MqttClient mqttClient = new MqttClient("192.168.0.232");
+            data = "MQTT Client installed and connected to Holistic node with broker: 192.168.0.232";
 
             //Get published message.
             mqttClient.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
