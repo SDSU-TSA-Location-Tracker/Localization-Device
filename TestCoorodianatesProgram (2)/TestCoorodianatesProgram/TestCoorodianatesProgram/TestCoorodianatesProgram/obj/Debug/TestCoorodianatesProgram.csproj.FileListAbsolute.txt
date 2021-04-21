@@ -1,0 +1,34 @@
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.exe.config
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.exe
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.pdb
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csprojResolveAssemblyReference.cache
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\MainWindow.g.cs
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\App.g.cs
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram_MarkupCompile.cache
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram_MarkupCompile.lref
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\MainWindow.baml
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.g.resources
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.Properties.Resources.resources
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csproj.GenerateResource.Cache
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csproj.CoreCompileInputs.cache
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.exe
+c:\users\leo\source\repos\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.pdb
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csprojAssemblyReference.cache
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\MainWindow.g.cs
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\App.g.cs
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram_MarkupCompile.cache
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram_MarkupCompile.lref
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.exe
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.pdb
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.exe.config
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.exe
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\TestCoorodianatesProgram.pdb
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\M2Mqtt.Net.dll
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\bin\Debug\M2Mqtt.Net.pdb
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\MainWindow.baml
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.g.resources
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.Properties.Resources.resources
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csproj.GenerateResource.cache
+C:\Users\harsh\Downloads\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.csproj.CopyComplete
+D:\Localization-Device\TestCoorodianatesProgram (2)\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.exe
+D:\Localization-Device\TestCoorodianatesProgram (2)\TestCoorodianatesProgram\TestCoorodianatesProgram\TestCoorodianatesProgram\obj\Debug\TestCoorodianatesProgram.pdb
