@@ -202,16 +202,5 @@ void loop() {
       scanState = !scanState;
     }
   }
-  if (digitalRead(SWITCH_MODE_M) == HIGH && ButtonMode != 'M')
-  {
-    lastButtonMode = ButtonMode;
-    ButtonMode = 'M';
-    mobileMale();
-  }
-  if (digitalRead(SWITCH_MODE_F) == HIGH && ButtonMode != 'F')
-  {
-    lastButtonMode = ButtonMode;
-    ButtonMode = 'F';
-    mobileFemale();
-  }
+1
 }
