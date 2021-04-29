@@ -40,23 +40,23 @@ namespace TSA_Tracker
             blueCircle.Source = new BitmapImage(new Uri(@"/Images/BlueCircle.png", UriKind.Relative));
             yellowCircle.Source = new BitmapImage(new Uri(@"/Images/YellowCircle.png", UriKind.Relative));
             greenCircle.Source = new BitmapImage(new Uri(@"/Images/GreenCircle.png", UriKind.Relative));
-            blankImage.Source = new BitmapImage(new Uri(@"/Images/BlankImage.png", UriKind.Relative));
+            //blankImage.Source = new BitmapImage(new Uri(@"/Images/BlankImage.png", UriKind.Relative));
 
-            //BlankReplayGrid();
+            BlankReplayGrid();
 
-            ////Create client for MQTT broker.
-            //MqttClient mqttClient = new MqttClient("192.168.4.65");
-            //data = "MQTT Client installed and connected to Holistic node with broker: 192.168.4.65";
+            //Create client for MQTT broker.
+            MqttClient mqttClient = new MqttClient("192.168.208.58");
+            data = "MQTT Client installed and connected to Holistic node with broker: 192.168.4.65";
 
-            ////Get published message.
-            //mqttClient.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+            //Get published message.
+            mqttClient.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
-            ////Subscribe to specific topic lines for male and female coordinate locations.
-            //mqttClient.Subscribe(new string[] { "male" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            //mqttClient.Subscribe(new string[] { "female" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            //Subscribe to specific topic lines for male and female coordinate locations.
+            mqttClient.Subscribe(new string[] { "male" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            mqttClient.Subscribe(new string[] { "female" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
-            ////Create connection.
-            //mqttClient.Connect("CSharpMqttClient", "", "", true, 60);
+            //Create connection.
+            mqttClient.Connect("CSharpMqttClient", "", "", true, 60);
         }
 
         //We need to automatically update the msg value whenever new data is received, so we cannot simply 
@@ -68,14 +68,18 @@ namespace TSA_Tracker
             var msg = System.Text.Encoding.Default.GetString(e.Message);
             string DeviceOne = null;
             string DeviceTwo = null;
-
+            int i = 0;
             //Update the male and female textboxes; for the real program, replace with male/female circles in grid.
             //NOTE: we get passed information simultaneously with MQTT.
             this.Dispatcher.Invoke((Action)(() =>
             {
                 //Send male/female information to male/female form elements.
-                if (e.Topic == "male") DeviceOne = msg;
-                else if (e.Topic == "female") DeviceTwo = msg;
+                string coords = msg;
+                char[] separators = new char[] { '\t' };
+                string[] s = coords.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                DeviceOne = s[0];
+                DeviceTwo = s[1];
 
                 UpdateLive(DeviceOne, DeviceTwo);
             }));
@@ -85,6 +89,7 @@ namespace TSA_Tracker
 
         private void UpdateLive(string d1, string d2)
         {
+            BlankLiveGrid();
             if (d1 == "A0" && d2 == "A0") this.Dispatcher.Invoke(() => { A0L.Source = greenCircle.Source; });
             else if (d1 == "A1" && d2 == "A1") this.Dispatcher.Invoke(() => { A1L.Source = greenCircle.Source; });
             else if (d1 == "A2" && d2 == "A2") this.Dispatcher.Invoke(() => { A2L.Source = greenCircle.Source; });
@@ -165,6 +170,34 @@ namespace TSA_Tracker
                 else if (d2 == "E4") this.Dispatcher.Invoke(() => { E4L.Source = yellowCircle.Source; });
             }
         }
+        private void BlankLiveGrid()
+        {
+            this.Dispatcher.Invoke(() => { A0L.Source = null; });
+            this.Dispatcher.Invoke(() => { A1L.Source = null; });
+            this.Dispatcher.Invoke(() => { A2L.Source = null; });
+            this.Dispatcher.Invoke(() => { A3L.Source = null; });
+            this.Dispatcher.Invoke(() => { A4L.Source = null; });
+            this.Dispatcher.Invoke(() => { B0L.Source = null; });
+            this.Dispatcher.Invoke(() => { B1L.Source = null; });
+            this.Dispatcher.Invoke(() => { B2L.Source = null; });
+            this.Dispatcher.Invoke(() => { B3L.Source = null; });
+            this.Dispatcher.Invoke(() => { B4L.Source = null; });
+            this.Dispatcher.Invoke(() => { C0L.Source = null; });
+            this.Dispatcher.Invoke(() => { C1L.Source = null; });
+            this.Dispatcher.Invoke(() => { C2L.Source = null; });
+            this.Dispatcher.Invoke(() => { C3L.Source = null; });
+            this.Dispatcher.Invoke(() => { C4L.Source = null; });
+            this.Dispatcher.Invoke(() => { D0L.Source = null; });
+            this.Dispatcher.Invoke(() => { D1L.Source = null; });
+            this.Dispatcher.Invoke(() => { D2L.Source = null; });
+            this.Dispatcher.Invoke(() => { D3L.Source = null; });
+            this.Dispatcher.Invoke(() => { D4L.Source = null; });
+            this.Dispatcher.Invoke(() => { E0L.Source = null; });
+            this.Dispatcher.Invoke(() => { E1L.Source = null; });
+            this.Dispatcher.Invoke(() => { E2L.Source = null; });
+            this.Dispatcher.Invoke(() => { E3L.Source = null; });
+            this.Dispatcher.Invoke(() => { E4L.Source = null; });
+        }
 
         private void LoadReplayFileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -178,14 +211,14 @@ namespace TSA_Tracker
 
             bool? fileOpenResult = loadDialog.ShowDialog();
 
-            if(fileOpenResult == true)
+            if (fileOpenResult == true)
             {
                 try
                 {
                     string allCoords;
                     loadedReplayFile.LoadedReplayFilePath = loadDialog.FileName;
 
-                    if(File.Exists(loadedReplayFile.LoadedReplayFilePath))
+                    if (File.Exists(loadedReplayFile.LoadedReplayFilePath))
                     {
                         StreamReader loadedReplay = new StreamReader(loadedReplayFile.LoadedReplayFilePath);
                         allCoords = loadedReplay.ReadToEnd();
@@ -196,10 +229,10 @@ namespace TSA_Tracker
                         List<string> list2 = new List<string>();
 
                         //Create lists for both male and female device coordinates
-                        for(int i = 0; i < s.Length; i += 2)
+                        for (int i = 0; i < s.Length; i += 2)
                         {
                             list1.Add(s[i]);
-                            list2.Add(s[i+1]);
+                            list2.Add(s[i + 1]);
                         }
 
                         //Load these lists as arrays into replay object
@@ -209,7 +242,7 @@ namespace TSA_Tracker
                         FileName_TextBox.Text = loadDialog.SafeFileName;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Error loading file: " + ex);
                 }
@@ -220,13 +253,13 @@ namespace TSA_Tracker
 
         private void StartReplay_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
             runThread = new Thread(() => RunReplay(waitHandle));
             runThread.Start();
 
         }
 
-        
+
 
         private void RunReplay(WaitHandle wh)
         {
@@ -357,16 +390,16 @@ namespace TSA_Tracker
 
         private void StopReplay_Button_Click(object sender, RoutedEventArgs e)
         {
-           
 
-                
+
+
         }
     }
 
     public class Replay
     {
         public string LoadedReplayFilePath { get; set; }
-        public string[] DeviceOnePositions { get; set; } 
+        public string[] DeviceOnePositions { get; set; }
         public string[] DeviceTwoPositions { get; set; }
         public DateTime StartTime { get; set; }
 
