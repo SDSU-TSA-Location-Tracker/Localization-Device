@@ -45,8 +45,8 @@ namespace TSA_Tracker
             BlankReplayGrid();
 
             //Create client for MQTT broker.
-            MqttClient mqttClient = new MqttClient("192.168.208.58");
-            data = "MQTT Client installed and connected to Holistic node with broker: 192.168.4.65";
+            MqttClient mqttClient = new MqttClient("192.168.0.4");
+            data = "MQTT Client installed and connected to Holistic node with broker: 192.168.0.4";
 
             //Get published message.
             mqttClient.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
@@ -75,7 +75,7 @@ namespace TSA_Tracker
             {
                 //Send male/female information to male/female form elements.
                 string coords = msg;
-                char[] separators = new char[] { '\t' };
+                char[] separators = new char[] { '\t'};
                 string[] s = coords.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
                 DeviceOne = s[0];
