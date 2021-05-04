@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TSA_Tracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="570" WindowState="Normal" ResizeMode="NoResize" >
+        Title="MainWindow" Height="720" Width="585" WindowState="Normal" ResizeMode="NoResize" >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -225,15 +225,41 @@
                     </Grid>
                     <StackPanel Grid.Row="1">
                         <DockPanel  Margin="10,10,0,0">
-                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                <Button Name="LoadReplayFile_Button" Content="Load Replay File" Margin="0,0,0,0" Width="100" Click="LoadReplayFileButton_Click"/>
-                                <Label Content="File: " Margin="10,0,0,0"/>
-                                <TextBox x:Name="FileName_TextBox" Width="100"/>
-                            </StackPanel>
-                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,00,10,0">
-                                <Button Name="StartReplay_Button" Content="Start Replay" Margin="0,0,10,0" Width="75" Click="StartReplay_Button_Click" />
-                                <Button Name="StopReplay_Button" Content="Stop Replay" Margin="0,0,10,0" Width="75" Click="StopReplay_Button_Click"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="275"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                                    <Button Name="LoadReplayFile_Button" Content="Load Replay File" Margin="0,0,0,5" Width="100" HorizontalAlignment="Left" Click="LoadReplayFileButton_Click"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="File: " Margin="0,0,0,0"/>
+                                        <TextBox x:Name="FileName_TextBox" Width="130"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <DockPanel Grid.Column="2">
+                                    <StackPanel DockPanel.Dock="Right"  Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
+                                        <Button Name="StartReplay_Button" Content="Start Replay" Margin="0,0,10,10" Width="75" Click="StartReplay_Button_Click" />
+                                        <Button Name="StopReplay_Button" Content="Stop Replay" Margin="0,0,10,0" Width="75" Click="StopReplay_Button_Click"/>
+                                    </StackPanel>
+                                    <StackPanel DockPanel.Dock="Left">
+                                        <Label Content="Time Elapsed: "/>
+                                        <Label Content="Date: "/>
+                                        <Label Content="Start Time: "/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Label Name="TimeElapsed_Label" Content=""/>
+                                        <Label Name="Date_Label" Content=""/>
+                                        <Label Name="StartTimeLabel" Content=""/>
+                                    </StackPanel>
+                                </DockPanel>
+                                <StackPanel Grid.Column="1">
+                                    <Button Name="Play_Button" Content="Play"  Margin="0,0,0,10" Click="Play_Button_Click"/>
+                                    <Button Name="Pause_Button" Content="Pause" Click="Pause_Button_Click" />
+                                    <Label Name="PlayPause_Label" Content=""/>
+                                </StackPanel>
+                            </Grid>
                         </DockPanel>
                         <DockPanel>
                             
