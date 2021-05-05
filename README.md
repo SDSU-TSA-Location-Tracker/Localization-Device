@@ -32,35 +32,41 @@ Here is an example of how to create a new branch off of main. Please use the fol
 #### Github Branch Example
 
 Create a new branch off of **RaspberryPi** called "Tristan_RaspberryPi_PCB_Design"
-
 ```
-git checkout -b Tristan_RaspberryPi_PCB_Design main
+git checkout -b Tristan_RaspberryPi_PCB_Design RaspberryPi
 ```
-
 #### Git Workflow
 
 Here is a step by step explanation of how a typical worksession goes
 
 1. Open git bash or linux terminal in the working directory of where you store the repository files on your computer. This is can be done by right-clicking inside the folder you save the files and selecting "Git Bash Here"
 
-2. Pull any and all changes from the github repository to be saved into your local git
+2. Pull any and all changes from the github repository **main** to be saved into your local git. Note you must enter the exact branches you wish to update your local version of to the github version. See step 3 on how to change current branch. 
 ```
-git pull
+git pull origin [Name_of_Branch]
 ```
 
 3. Enter the exact branch you wish to do development in. Important to do this step as failure to do so may result in conflicts
 ```
-git branch [Name_of_Branch]
+git checkout [Name_of_Branch]
 ```
 
 4. Start developing as you normally do until you are all finished
 
-5. Commit the changes to your local git with a message of what was changed. It is extremely important to add a message as the commit will open up VIM expecting you to write a message in. To avoid this issue, be sure to write the message in the intial commit command.
+5. Add the specific files that were worked
+```
+git add file.txt
+```
+
+6. Commit the changes to the added files to the local git with a message of what was changed. It is important to add a message as the commit will open up VIM expecting you to write a message in. **To avoid this issue, be sure to write the message in the initial commit command**
+
 ```
 git commit -m "Programmed the Arduino to blink an LED every 5 seconds"
 ```
 
-6. Push these commits in your local git to the github so everyone can pull these changes to their local computers
+7. Push these commits in your local git to the github so everyone can pull these changes to their local computers
 ```
 git push origin [Name_of_Branch]
 ```
+
+8. A pop window will appear prompting for you github login information. Enter you username into the first window and click submit, then enter you password into the second window and click submit.
