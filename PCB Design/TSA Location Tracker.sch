@@ -1,0 +1,410 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "TSA Location Tracker"
+Date "2021-02-08"
+Rev "A"
+Comp "San Diego State University"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Connection ~ 3038 2466
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 6027A06A
+P 3038 2466
+F 0 "#FLG0101" H 3038 2541 50  0001 C CNN
+F 1 "PWR_FLAG" H 3038 2639 50  0000 C CNN
+F 2 "" H 3038 2466 50  0001 C CNN
+F 3 "~" H 3038 2466 50  0001 C CNN
+	1    3038 2466
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5638 3791 5638 2241
+Wire Wire Line
+	4188 2416 4188 2666
+Wire Wire Line
+	4188 2866 4188 3116
+$Comp
+L Device:R R3
+U 1 1 60248B4C
+P 5113 2416
+F 0 "R3" V 5288 2366 50  0000 L CNN
+F 1 "10k" V 5213 2341 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5043 2416 50  0001 C CNN
+F 3 "~" H 5113 2416 50  0001 C CNN
+	1    5113 2416
+	0    -1   -1   0   
+$EndComp
+Connection ~ 3038 3291
+Wire Wire Line
+	3038 3291 3038 3341
+$Comp
+L power:GND #PWR0105
+U 1 1 6027D46A
+P 3038 3341
+F 0 "#PWR0105" H 3038 3091 50  0001 C CNN
+F 1 "GND" H 3043 3168 50  0000 C CNN
+F 2 "" H 3038 3341 50  0001 C CNN
+F 3 "" H 3038 3341 50  0001 C CNN
+	1    3038 3341
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3038 3016 3038 3291
+Connection ~ 3038 3016
+Connection ~ 3038 2741
+Wire Wire Line
+	3038 2741 3038 3016
+Wire Wire Line
+	3038 2466 3038 2741
+$Comp
+L Mechanical:MountingHole_Pad H4
+U 1 1 6027AD61
+P 2938 3291
+F 0 "H4" V 2938 3516 50  0001 C CNN
+F 1 "MountingHole_Pad" H 3038 3249 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2938 3291 50  0001 C CNN
+F 3 "~" H 2938 3291 50  0001 C CNN
+	1    2938 3291
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H3
+U 1 1 6027A62A
+P 2938 3016
+F 0 "H3" V 2938 3241 50  0001 C CNN
+F 1 "MountingHole_Pad" H 3038 2974 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2938 3016 50  0001 C CNN
+F 3 "~" H 2938 3016 50  0001 C CNN
+	1    2938 3016
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H2
+U 1 1 60279E05
+P 2938 2741
+F 0 "H2" V 2938 2966 50  0001 C CNN
+F 1 "MountingHole_Pad" H 3038 2699 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2938 2741 50  0001 C CNN
+F 3 "~" H 2938 2741 50  0001 C CNN
+	1    2938 2741
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H1
+U 1 1 602781CC
+P 2938 2466
+F 0 "H1" V 2938 2691 50  0001 C CNN
+F 1 "MountingHole_Pad" H 3038 2424 50  0001 L CNN
+F 2 "MountingHole:MountingHole_2.7mm_M2.5_Pad" H 2938 2466 50  0001 C CNN
+F 3 "~" H 2938 2466 50  0001 C CNN
+	1    2938 2466
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5838 3341 5838 3791
+Wire Wire Line
+	6838 3341 5838 3341
+Wire Wire Line
+	6838 3266 6838 3341
+Wire Wire Line
+	5738 3266 5738 3791
+Wire Wire Line
+	6363 3266 5738 3266
+$Comp
+L power:GND #PWR0104
+U 1 1 60270A4B
+P 3298 5486
+F 0 "#PWR0104" H 3298 5236 50  0001 C CNN
+F 1 "GND" H 3303 5313 50  0000 C CNN
+F 2 "" H 3298 5486 50  0001 C CNN
+F 3 "" H 3298 5486 50  0001 C CNN
+	1    3298 5486
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6838 2916 6838 2966
+Wire Wire Line
+	6363 2916 6838 2916
+Wire Wire Line
+	6363 2966 6363 2916
+Wire Wire Line
+	7188 2241 7388 2241
+$Comp
+L Switch:SW_SP3T Mode_Switch1
+U 1 1 60250F9E
+P 3988 2766
+F 0 "Mode_Switch1" H 3788 2966 50  0000 C CNN
+F 1 "SW_SP3T" H 3988 2958 50  0001 C CNN
+F 2 "EG1313:E-Switch-EG1313-0" H 3363 2941 50  0001 C CNN
+F 3 "~" H 3363 2941 50  0001 C CNN
+	1    3988 2766
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push LED_Switch1
+U 1 1 60269480
+P 6988 2241
+F 0 "LED_Switch1" H 6988 2384 50  0000 C CNN
+F 1 "SW_SPST" H 6988 2385 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm" H 6988 2241 50  0001 C CNN
+F 3 "~" H 6988 2241 50  0001 C CNN
+	1    6988 2241
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 6025C5AE
+P 6838 3116
+F 0 "D1" V 6888 2991 50  0000 C CNN
+F 1 "LED" V 6788 2966 50  0000 C CNN
+F 2 "LED_THT:LED_D3.0mm" H 6838 3116 50  0001 C CNN
+F 3 "~" H 6838 3116 50  0001 C CNN
+	1    6838 3116
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5363 3116 5363 3166
+Wire Wire Line
+	5263 3116 5363 3116
+Wire Wire Line
+	5363 2416 5363 2441
+Wire Wire Line
+	5263 2416 5363 2416
+Wire Wire Line
+	5363 2766 5363 2816
+Wire Wire Line
+	5263 2766 5363 2766
+$Comp
+L power:GND #PWR0103
+U 1 1 6025860A
+P 5363 2441
+F 0 "#PWR0103" H 5363 2191 50  0001 C CNN
+F 1 "GND" H 5368 2268 50  0000 C CNN
+F 2 "" H 5363 2441 50  0001 C CNN
+F 3 "" H 5363 2441 50  0001 C CNN
+	1    5363 2441
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 60257C3D
+P 5363 2816
+F 0 "#PWR0102" H 5363 2566 50  0001 C CNN
+F 1 "GND" H 5368 2643 50  0000 C CNN
+F 2 "" H 5363 2816 50  0001 C CNN
+F 3 "" H 5363 2816 50  0001 C CNN
+	1    5363 2816
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 60257134
+P 5363 3166
+F 0 "#PWR0101" H 5363 2916 50  0001 C CNN
+F 1 "GND" H 5368 2993 50  0000 C CNN
+F 2 "" H 5363 3166 50  0001 C CNN
+F 3 "" H 5363 3166 50  0001 C CNN
+	1    5363 3166
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 60248DB2
+P 6008 2511
+F 0 "R5" H 6078 2557 50  0000 L CNN
+F 1 "10k" H 6078 2466 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5938 2511 50  0001 C CNN
+F 3 "~" H 6008 2511 50  0001 C CNN
+	1    6008 2511
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 60248CF4
+P 6363 3116
+F 0 "R4" H 6433 3162 50  0000 L CNN
+F 1 "330" H 6433 3071 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6293 3116 50  0001 C CNN
+F 3 "~" H 6363 3116 50  0001 C CNN
+	1    6363 3116
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 602489B3
+P 5113 2766
+F 0 "R2" V 5263 2716 50  0000 L CNN
+F 1 "10k" V 5188 2691 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5043 2766 50  0001 C CNN
+F 3 "~" H 5113 2766 50  0001 C CNN
+	1    5113 2766
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 60247EA8
+P 5113 3116
+F 0 "R1" V 5288 3066 50  0000 L CNN
+F 1 "10k" V 5213 3041 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5043 3116 50  0001 C CNN
+F 3 "~" H 5113 3116 50  0001 C CNN
+	1    5113 3116
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5288 5766 4938 5766
+Wire Wire Line
+	4938 5516 4038 5516
+$Comp
+L TSA-Location-Tracker-rescue:Arduino-NANO-33-Arduino-nano-33 Arduino1
+U 1 1 6021B026
+P 5438 4291
+F 0 "Arduino1" H 5438 5356 50  0000 C CNN
+F 1 "Arduino-NANO-33" H 5438 5265 50  0001 C CNN
+F 2 "ANano_33:NANO_33_Socket_Castell" H 5113 4191 50  0001 C CNN
+F 3 "~" H 5113 4191 50  0001 C CNN
+	1    5438 4291
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Switch:SW_DPDT_x2 Power_Switch1
+U 1 1 60298CCA
+P 5488 5766
+F 0 "Power_Switch1" H 5493 5546 50  0000 C CNN
+F 1 "SW_DPDT_x2" H 5488 5960 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_CuK_JS202011AQN_DPDT_Angled" H 5488 5766 50  0001 C CNN
+F 3 "~" H 5488 5766 50  0001 C CNN
+	1    5488 5766
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4038 5516 4038 5616
+$Comp
+L TSA-Location-Tracker-rescue:AdafruitCharger-AdafruitCharger U1
+U 1 1 602A748A
+P 3638 5766
+F 0 "U1" H 4116 5820 50  0000 L CNN
+F 1 "AdafruitCharger" H 4116 5729 50  0000 L CNN
+F 2 "Adafruit MiniLipo:AdafruitMiniLipo" H 3888 6216 50  0001 C CNN
+F 3 "" H 3888 6216 50  0001 C CNN
+	1    3638 5766
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3298 5486 3298 5261
+Wire Wire Line
+	3298 5261 3838 5261
+Wire Wire Line
+	3838 5261 3838 5616
+$Comp
+L power:GND #PWR0108
+U 1 1 602BAE70
+P 6008 2756
+F 0 "#PWR0108" H 6008 2506 50  0001 C CNN
+F 1 "GND" H 6013 2583 50  0000 C CNN
+F 2 "" H 6008 2756 50  0001 C CNN
+F 3 "" H 6008 2756 50  0001 C CNN
+	1    6008 2756
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5638 2241 6008 2241
+Wire Wire Line
+	6008 2361 6008 2241
+Connection ~ 6008 2241
+Wire Wire Line
+	6008 2661 6008 2756
+Wire Wire Line
+	4188 3116 4893 3116
+Wire Wire Line
+	4893 3116 4893 3571
+Wire Wire Line
+	4893 3571 5138 3571
+Wire Wire Line
+	5138 3571 5138 3791
+Connection ~ 4893 3116
+Wire Wire Line
+	4893 3116 4963 3116
+Wire Wire Line
+	4188 2766 4813 2766
+Wire Wire Line
+	4813 2766 4813 3641
+Wire Wire Line
+	4813 3641 5038 3641
+Wire Wire Line
+	5038 3641 5038 3791
+Connection ~ 4813 2766
+Wire Wire Line
+	4813 2766 4963 2766
+Wire Wire Line
+	4188 2416 4733 2416
+Wire Wire Line
+	4733 2416 4733 3711
+Wire Wire Line
+	4733 3711 4938 3711
+Wire Wire Line
+	4938 3711 4938 3791
+Connection ~ 4733 2416
+Wire Wire Line
+	4733 2416 4963 2416
+Wire Wire Line
+	6038 4791 6038 5261
+Wire Wire Line
+	6038 5261 3838 5261
+Connection ~ 3838 5261
+Wire Wire Line
+	6008 2241 6788 2241
+Wire Wire Line
+	7388 2241 7388 4891
+Wire Wire Line
+	4938 5516 4938 5766
+Wire Wire Line
+	3788 2766 3788 1791
+Wire Wire Line
+	3788 1791 7388 1791
+Wire Wire Line
+	7388 1791 7388 2241
+Connection ~ 7388 2241
+Wire Wire Line
+	7388 4891 4838 4891
+Wire Wire Line
+	4838 4891 4838 4791
+Wire Wire Line
+	5688 5866 7388 5866
+Wire Wire Line
+	7388 5866 7388 4891
+Connection ~ 7388 4891
+NoConn ~ 6138 3791
+NoConn ~ 6038 3791
+NoConn ~ 5938 3791
+NoConn ~ 5538 3791
+NoConn ~ 5438 3791
+NoConn ~ 5338 3791
+NoConn ~ 5238 3791
+NoConn ~ 4838 3791
+NoConn ~ 4738 3791
+NoConn ~ 4738 4791
+NoConn ~ 4938 4791
+NoConn ~ 5038 4791
+NoConn ~ 5138 4791
+NoConn ~ 5238 4791
+NoConn ~ 5338 4791
+NoConn ~ 5438 4791
+NoConn ~ 5538 4791
+NoConn ~ 5638 4791
+NoConn ~ 5738 4791
+NoConn ~ 5838 4791
+NoConn ~ 5938 4791
+NoConn ~ 6138 4791
+NoConn ~ 5688 5666
+NoConn ~ 3738 5616
+NoConn ~ 3938 5616
+$EndSCHEMATC
