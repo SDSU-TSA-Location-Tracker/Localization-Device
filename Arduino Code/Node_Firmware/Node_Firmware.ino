@@ -10,9 +10,21 @@ const byte SWITCH_MODE_M = 8;
 
 volatile char ButtonMode;
 volatile char lastButtonMode;
+
+// Uncomment only the name of the anchor node being flashed to
+char BLE_Name[9] = "AN-A0-NA";
 volatile char currentLocation[3] = "A0";
 volatile byte locationIndex = 0;
-char BLE_Name[9] = "AN-A0-NA";
+//char BLE_Name[9] = "AN-A4-NA";
+//volatile char currentLocation[3] = "A4";
+//volatile byte locationIndex = 4;
+//char BLE_Name[9] = "AN-E0-NA";
+//volatile char currentLocation[3] = "E0";
+//volatile byte locationIndex = 20;
+//char BLE_Name[9] = "AN-E4-NA";
+//volatile char currentLocation[3] = "E4";
+//volatile byte locationIndex = 24;
+
 
 char locationArray[25][3] = {"A0", "A1", "A2", "A3", "A4",
                              "B0", "B1", "B2", "B3", "B4",
@@ -130,7 +142,6 @@ void anchor(void) {
 }
 
 void setup() {
-  //Serial.begin(115200);
   pinMode(PUSH_BUTTON, INPUT);
   pinMode(SWITCH_MODE_M, INPUT);
   pinMode(SWITCH_MODE_A, INPUT);

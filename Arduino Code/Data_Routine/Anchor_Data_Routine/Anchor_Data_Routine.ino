@@ -9,8 +9,18 @@ const int SWITCH_MODE_B = 9;
 const int SWITCH_MODE_C = 8;
 
 volatile char ButtonMode;
+
+// Uncomment only the name of the anchor node the code is being flashed to
 volatile char currentLocation[3] = {"A0"};
 char anchorName[9] = {"AN-A0-NA"};
+//volatile char currentLocation[3] = {"A4"};
+//char anchorName[9] = {"AN-A4-NA"};
+//volatile char currentLocation[3] = {"E0"};
+//char anchorName[9] = {"AN-E0-NA"};
+//volatile char currentLocation[3] = {"E4"};
+//char anchorName[9] = {"AN-E4-NA"};
+
+
 volatile byte locationIndex;
 
 // Variables will change:
